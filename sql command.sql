@@ -169,23 +169,7 @@ left join Departments d
 
 -- Nəticəni average salary-yə görə böyükdən kiçiyə sırala.
 
--- select 
--- 	d.department_name,
---     count(e.employee_id) as sum_of_employee,
---     avg(e.salary) as average_salary
--- from departments d
--- join employees e 
--- on d.department_id = e.department_id
--- group by d.department_name
--- having average_salary > 5500
--- order by average_salary desc;
 
--- Hər department-də ən yüksək maaş alan employee-ni tap.
--- Göstər:
-
--- department_name
--- employee name
--- salary
 
 -- Məsələn:
 
@@ -698,18 +682,7 @@ group by d.department_name
 having average_salary > 5500
 order by average_salary desc;
 
--- Hər department-də ən yüksək maaş alan employee-ni tap.
--- Göstər:
 
--- department_name
--- employee name
--- salary
-
--- Məsələn:
-
--- IT        Maria    5500
--- Finance   Emma     7000
--- HR        David    4500
 
 
 
