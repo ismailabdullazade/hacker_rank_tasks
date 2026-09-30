@@ -682,6 +682,37 @@ group by d.department_name
 having average_salary > 5500
 order by average_salary desc;
 
+WITH project_groups AS (
+    SELECT
+        start_date,
+        end_date,
+        SUM(new_project) OVER (ORDER BY start_date) AS project_id
+    FROM (
+        SELECT
+            start_date,
+            end_date,
+            CASE
+                WHEN start_date = prev_end_date THEN 0
+                ELSE 1
+            END AS new_project
+        FROM (
+            SELECT
+                start_date,
+                end_date,
+                LAG(end_date) OVER (ORDER BY start_date) AS prev_end_date
+            FROM Projects
+        ) AS t1
+    ) AS t2
+)
+
+SELECT
+    MIN(start_date) AS start_date,
+    MAX(end_date) AS end_date
+FROM project_groups
+GROUP BY project_id
+ORDER BY DATEDIFF(MAX(end_date), MIN(start_date)), MIN(start_date);
+
+
 
 
 
